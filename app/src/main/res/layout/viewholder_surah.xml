@@ -7,16 +7,16 @@
 
     <TextView
         android:id="@+id/surahId"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/chapter_number_background"
         android:text="1"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/elm"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif-medium"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif-black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,17 +47,20 @@
             android:text="Pembuka | 7 Ayat"
             android:textColor="@color/stonewall"
             android:textSize="14sp"
-            android:fontFamily="sans-serif-smallcaps"/>
+            android:fontFamily="sans-serif-smallcaps"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/arabic"
         android:layout_width="104dp"
         android:layout_height="match_parent"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
+        android:paddingTop="4dp"
         android:gravity="center"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="48sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

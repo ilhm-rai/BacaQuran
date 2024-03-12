@@ -5,28 +5,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.codetarian.bacaquran.adapter.SurahAdapter
+import com.codetarian.bacaquran.adapter.SurahRVAdapter
+import com.codetarian.bacaquran.adapter.SurahClickInterface
 import com.codetarian.bacaquran.viewmodel.SurahViewModel
 import com.codetarian.bacaquran.databinding.FragmentSurahBinding
+import com.codetarian.bacaquran.domain.SurahDomain
 
-class SurahFragment : Fragment() {
+class SurahFragment : Fragment(), SurahClickInterface {
 
     private lateinit var binding: FragmentSurahBinding
-    private val surahViewModel: SurahViewModel by viewModels()
+    private lateinit var viewModel: SurahViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSurahBinding.inflate(inflater, container, false)
-        val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val surahRVAdapter by lazy { SurahRVAdapter(this.requireContext(), this) }
+        
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        )[SurahViewModel::class.java]
+
+        viewModel.allSurah.observe(viewLifecycleOwner, Observer { list ->
+            list?.let {
+                surahRVAdapter.updateList(it)
+            }
+        })
+
         binding.apply {
-            val surahAdapter by lazy { SurahAdapter(surahViewModel.loadSurah()) }
             recyclerview.apply {
-                adapter = surahAdapter
+                adapter = surahRVAdapter
                 this.layoutManager = layoutManager
                 addItemDecoration(
                     DividerItemDecoration(
@@ -38,5 +53,9 @@ class SurahFragment : Fragment() {
         }
 
         return binding.recyclerview
+    }
+
+    override fun onSurahClick(surah: SurahDomain) {
+        TODO("Not yet implemented")
     }
 }

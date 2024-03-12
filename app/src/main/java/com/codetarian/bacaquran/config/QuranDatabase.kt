@@ -26,7 +26,7 @@ abstract class QuranDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     QuranDatabase::class.java,
-                    "quran_database"
+                    "quran_database.db"
                 ).build()
                 INSTANCE = instance
                 // return instance
