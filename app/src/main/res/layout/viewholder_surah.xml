@@ -35,7 +35,7 @@
             android:id="@+id/transliteration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Surah Al-Fatihah"
+            android:text="Al-Fatihah"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
@@ -44,7 +44,7 @@
             android:id="@+id/surah_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pembuka | 7 Ayat"
+            android:text="Pembukaan (7 Ayat)"
             android:textColor="@color/stonewall"
             android:textSize="14sp"
             android:fontFamily="sans-serif-smallcaps"
@@ -60,7 +60,7 @@
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="50sp"
+        android:textSize="54sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

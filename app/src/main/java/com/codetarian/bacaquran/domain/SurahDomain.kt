@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "quran_surah")
 data class SurahDomain(
     @PrimaryKey @ColumnInfo(name = "id") var id: Int,
-    @ColumnInfo(name = "font_type") var fontType: String,
-    @ColumnInfo(name = "arabic_font_code") var arabicFontCode: String,
+    @ColumnInfo(name = "quran_surah_font") var quranSurahFont: String,
+    @ColumnInfo(name = "quran_karim_font") var quranKarimFont: String,
     @ColumnInfo(name = "latin") var latin: String,
     @ColumnInfo(name = "transliteration") var transliteration: String,
     @ColumnInfo(name = "translation") var translation: String,

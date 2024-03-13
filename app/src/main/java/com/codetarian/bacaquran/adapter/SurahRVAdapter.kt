@@ -34,14 +34,14 @@ class SurahRVAdapter(
 
     override fun onBindViewHolder(holder: SurahRVAdapter.ViewHolder, position: Int) {
         val item = allSurah[position]
-        val surahInfo = "${item.location} | ${item.numAyah} Ayat"
+        val surahInfo = "${item.translation} (${item.numAyah} Ayat)"
 
         holder.surahId.text = item.id.toString()
         holder.transliteration.text = item.transliteration
         holder.surahInfo.text = surahInfo
-        holder.arabic.text = item.arabicFontCode
+        holder.arabic.text = item.quranSurahFont
 
-        val fontType = if (item.fontType == "1") R.font.quran_surah_1 else R.font.quran_surah_2
+        val fontType = if (item.id < 60) R.font.quran_surah_1 else R.font.quran_surah_2
         val typeface: Typeface? = ResourcesCompat.getFont(context, fontType)
         holder.arabic.typeface = typeface
 
