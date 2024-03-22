@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.codetarian.bacaquran.dao.QuranDao
-import com.codetarian.bacaquran.domain.SurahDomain
+import com.codetarian.bacaquran.domain.Surah
+import com.codetarian.bacaquran.domain.Verse
 
-@Database(entities = [SurahDomain::class], version = 1, exportSchema = false)
+@Database(entities = [Surah::class, Verse::class], version = 2, exportSchema = false)
 abstract class QuranDatabase : RoomDatabase() {
 
     abstract fun getQuranDao(): QuranDao

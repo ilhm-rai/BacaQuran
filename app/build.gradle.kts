@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -64,6 +65,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:${appCompatVersion}")
     implementation("com.google.android.material:material:${materialVersion}")
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     // Lifecycle Components
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")

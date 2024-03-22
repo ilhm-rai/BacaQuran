@@ -14,7 +14,7 @@
         android:text="1"
         android:gravity="center"
         android:textAlignment="center"
-        android:textColor="@color/elm"
+        android:textColor="@color/persian_green"
         android:textSize="13sp"
         android:fontFamily="sans-serif-black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="@+id/surahId">
 
         <TextView
-            android:id="@+id/transliteration"
+            android:id="@+id/latin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Al-Fatihah"

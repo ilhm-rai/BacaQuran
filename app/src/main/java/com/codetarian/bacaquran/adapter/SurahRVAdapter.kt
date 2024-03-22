@@ -8,19 +8,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.codetarian.bacaquran.domain.SurahDomain
+import com.codetarian.bacaquran.domain.Surah
 import com.codetarian.bacaquran.R
 
 class SurahRVAdapter(
-    val context: Context,
-    val surahClickInterface: SurahClickInterface
+    private val context: Context,
+    private val surahClickInterface: SurahClickInterface
 ) : RecyclerView.Adapter<SurahRVAdapter.ViewHolder>() {
 
-    private val allSurah = ArrayList<SurahDomain>()
+    private val allSurah = ArrayList<Surah>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val surahId: TextView = itemView.findViewById(R.id.surahId)
-        val transliteration: TextView = itemView.findViewById(R.id.transliteration)
+        val transliteration: TextView = itemView.findViewById(R.id.latin)
         val surahInfo: TextView = itemView.findViewById(R.id.surah_info)
         val arabic: TextView = itemView.findViewById(R.id.arabic)
     }
@@ -50,7 +50,7 @@ class SurahRVAdapter(
         }
     }
 
-    fun updateList(newList: List<SurahDomain>) {
+    fun updateList(newList: List<Surah>) {
         allSurah.clear()
         allSurah.addAll(newList)
         notifyDataSetChanged()
@@ -60,5 +60,5 @@ class SurahRVAdapter(
 interface SurahClickInterface {
     // creating a method for click action
     // on recycler view item for updating it.
-    fun onSurahClick(surah: SurahDomain)
+    fun onSurahClick(surah: Surah)
 }

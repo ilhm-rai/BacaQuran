@@ -3,14 +3,13 @@ package com.codetarian.bacaquran.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import com.codetarian.bacaquran.config.QuranDatabase
-import com.codetarian.bacaquran.domain.SurahDomain
+import com.codetarian.bacaquran.domain.Surah
 import com.codetarian.bacaquran.repository.QuranRepository
 
 class SurahViewModel(application: Application) : AndroidViewModel(application) {
 
-    val allSurah : LiveData<List<SurahDomain>>
+    val allSurah : LiveData<List<Surah>>
     private val repository : QuranRepository
 
     init {
@@ -18,6 +17,4 @@ class SurahViewModel(application: Application) : AndroidViewModel(application) {
         repository = QuranRepository(dao)
         allSurah = repository.allSurah
     }
-
-    fun loadSurah() = repository.surahItems
 }

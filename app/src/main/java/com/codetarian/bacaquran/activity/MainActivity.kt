@@ -29,16 +29,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun copyDatabaseFromAssets() {
         val databaseFile = getDatabasePath("quran_database.db")
-        if (!databaseFile.exists()) {
-            try {
-                val inputStream = assets.open("quran_database.db")
-                val outputStream = FileOutputStream(databaseFile)
-                inputStream.copyTo(outputStream)
-                inputStream.close()
-                outputStream.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+//        if (!databaseFile.exists()) {
+        try {
+            val inputStream = assets.open("quran_database.db")
+            val outputStream = FileOutputStream(databaseFile)
+            inputStream.copyTo(outputStream)
+            inputStream.close()
+            outputStream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
+//        }
     }
 }
