@@ -1,65 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/dark_woodsmoke"
-    android:paddingTop="4dp"
-    android:paddingBottom="20dp">
+    app:cardCornerRadius="0dp">
 
-    <TextView
-        android:id="@+id/ayah"
-        android:layout_width="30dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_frame_number"
-        android:gravity="center"
-        android:text="@string/ayah"
-        android:textAlignment="center"
-        android:textColor="@color/persian_green"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="2dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ayah"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/dark_woodsmoke"
+        android:paddingTop="4dp"
+        android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/arabic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/alquran_indopak_by_quranwbw"
-            android:lineSpacingExtra="46sp"
-            android:lineSpacingMultiplier="0"
-            android:text="@string/ayah_arabic"
-            android:textColor="@color/white"
-            android:textDirection="rtl"
-            android:textSize="28sp" />
-
-        <TextView
-            android:id="@+id/latin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="@string/ayah_latin"
+            android:id="@+id/ayah"
+            android:layout_width="30dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_frame_number"
+            android:gravity="center"
+            android:text="@string/ayah"
+            android:textAlignment="center"
             android:textColor="@color/persian_green"
-            android:textSize="16sp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/translation"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/ayah_translation"
-            android:textColor="@color/pewter"
-            android:textSize="16sp" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ayah"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/arabic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alquran_indopak_by_quranwbw"
+                android:lineSpacingExtra="46sp"
+                android:lineSpacingMultiplier="0"
+                android:text="@string/ayah_arabic"
+                android:textColor="@color/white"
+                android:textDirection="rtl"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/latin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/ayah_latin"
+                android:textColor="@color/persian_green"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/translation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ayah_translation"
+                android:textColor="@color/pewter"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

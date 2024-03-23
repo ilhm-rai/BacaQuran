@@ -8,14 +8,14 @@
     tools:context=".fragment.VerseFragment">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fillViewport="true">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/main_content"
@@ -36,34 +36,34 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.63"
+                    android:gravity="center"
                     android:text="@string/head_location"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
                     android:textAlignment="center"
-                    android:gravity="center"/>
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/head_surah"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/head_surah"
-                    android:textColor="@color/white"
-                    android:textSize="32sp"
-                    android:textAlignment="center"
+                    android:fontFamily="@font/arab_quran_islamic_140"
                     android:gravity="center"
-                    android:fontFamily="@font/arab_quran_islamic_140"/>
+                    android:text="@string/head_surah"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
 
                 <TextView
                     android:id="@+id/head_ayah"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.63"
+                    android:gravity="center"
                     android:text="@string/head_ayah"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
                     android:textAlignment="center"
-                    android:gravity="center"/>
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
