@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragment.VerseFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".fragment.VerseFragment">
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/main_content"
@@ -35,7 +36,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.63"
-                    android:text="Makkiyah"
+                    android:text="@string/head_location"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:textAlignment="center"
@@ -46,18 +47,19 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/head_surah"
                     android:textColor="@color/white"
                     android:textSize="32sp"
                     android:textAlignment="center"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:fontFamily="@font/arab_quran_islamic_140"/>
 
                 <TextView
                     android:id="@+id/head_ayah"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.63"
-                    android:text="7 Ayat"
+                    android:text="@string/head_ayah"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:textAlignment="center"
@@ -71,14 +73,14 @@
                 android:background="@color/light_woodsmoke"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingVertical="16dp">
+                android:paddingVertical="8dp">
 
                 <ImageView
                     android:id="@+id/bismillah"
                     android:layout_width="176dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
-                    android:contentDescription="bismillahirrahmanirrahim"
+                    android:contentDescription="@string/bismillahirrahmanirrahim"
                     android:src="@drawable/bismillahirrahmanirrahim"
                     tools:srcCompat="@drawable/bismillahirrahmanirrahim" />
             </LinearLayout>

@@ -67,12 +67,12 @@ class VerseActivity : AppCompatActivity() {
                 adapter = viewPagerAdapter
             }
             TabLayoutMediator(tabs, viewpager) { tab, position ->
-                tab.text = list[position].transliteration
+                tab.text = "${list[position].id}. ${list[position].transliteration}"
             }.attach()
             viewpager.post {
-                viewpager.setCurrentItem(surahItem, false)
                 tabs.setScrollPosition(surahItem, 0f, true)
                 tabs.getTabAt(surahItem)?.select()
+                viewpager.setCurrentItem(surahItem, false)
             }
         }
     }

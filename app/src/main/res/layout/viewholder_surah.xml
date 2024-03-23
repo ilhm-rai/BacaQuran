@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="72dp"
     android:background="@color/dark_woodsmoke">
 
     <TextView
@@ -11,7 +11,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/chapter_number_background"
-        android:text="1"
+        android:text="@string/surah_number"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/persian_green"
@@ -35,7 +35,7 @@
             android:id="@+id/latin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Al-Fatihah"
+            android:text="@string/surah_latin"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
@@ -44,7 +44,7 @@
             android:id="@+id/surah_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pembukaan (7 Ayat)"
+            android:text="@string/surah_info"
             android:textColor="@color/stonewall"
             android:textSize="14sp"
             android:fontFamily="sans-serif-smallcaps"
@@ -55,12 +55,14 @@
         android:id="@+id/arabic"
         android:layout_width="104dp"
         android:layout_height="match_parent"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="16dp"
         android:paddingTop="4dp"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="54sp"
+        android:text="@string/surah_arabic"
+        android:fontFamily="@font/quran_surah_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

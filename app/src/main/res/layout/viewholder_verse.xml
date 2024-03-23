@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/dark_woodsmoke"
     android:paddingTop="4dp"
-    android:paddingHorizontal="8dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="20dp">
 
     <TextView
         android:id="@+id/ayah"
@@ -16,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_frame_number"
         android:gravity="center"
-        android:text="1"
+        android:text="@string/ayah"
         android:textAlignment="center"
         android:textColor="@color/persian_green"
         android:textSize="12sp"
@@ -27,12 +26,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="-8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="2dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ayah"
-        app:layout_constraintTop_toTopOf="@+id/ayah">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/arabic"
@@ -41,7 +40,7 @@
             android:fontFamily="@font/alquran_indopak_by_quranwbw"
             android:lineSpacingExtra="46sp"
             android:lineSpacingMultiplier="0"
-            android:text="بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ"
+            android:text="@string/ayah_arabic"
             android:textColor="@color/white"
             android:textDirection="rtl"
             android:textSize="28sp" />
@@ -51,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="bismillāhir-raḥmānir-raḥīm"
+            android:text="@string/ayah_latin"
             android:textColor="@color/persian_green"
             android:textSize="16sp" />
 
@@ -59,7 +58,7 @@
             android:id="@+id/translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang."
+            android:text="@string/ayah_translation"
             android:textColor="@color/pewter"
             android:textSize="16sp" />
     </LinearLayout>

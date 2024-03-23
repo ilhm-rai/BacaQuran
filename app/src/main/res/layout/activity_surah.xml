@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_woodsmoke"
     android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.SurahActivity">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -23,17 +23,17 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Surah" />
+            android:text="@string/surah" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Juz" />
+            android:text="@string/juz" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bookmark" />
+            android:text="@string/bookmark" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2

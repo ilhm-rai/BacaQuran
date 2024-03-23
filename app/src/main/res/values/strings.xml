@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">BacaQuran</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="ayah">1</string>
+    <string name="ayah_arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</string>
+    <string name="ayah_latin">bismillāhir-raḥmānir-raḥīm</string>
+    <string name="ayah_translation">Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang.</string>
+    <string name="head_location">Makkiyah</string>
+    <string name="head_surah">1</string>
+    <string name="head_ayah">7 Ayat</string>
+    <string name="bismillahirrahmanirrahim">bismillahirrahmanirrahim</string>
+    <string name="surah_arabic">1</string>
+    <string name="surah_info">Pembukaan (7 Ayat)</string>
+    <string name="surah_latin">Al-Fatihah</string>
+    <string name="surah_number">1</string>
+    <string name="surah">Surah</string>
+    <string name="juz">Juz</string>
+    <string name="bookmark">Bookmark</string>
 </resources>
