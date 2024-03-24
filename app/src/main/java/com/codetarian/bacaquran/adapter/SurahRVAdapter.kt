@@ -20,7 +20,7 @@ class SurahRVAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val surahId: TextView = itemView.findViewById(R.id.surahId)
-        val transliteration: TextView = itemView.findViewById(R.id.latin)
+        val transliteration: TextView = itemView.findViewById(R.id.transliteration)
         val surahInfo: TextView = itemView.findViewById(R.id.surah_info)
         val arabic: TextView = itemView.findViewById(R.id.arabic)
     }

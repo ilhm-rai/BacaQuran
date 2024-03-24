@@ -13,6 +13,7 @@ import com.codetarian.bacaquran.domain.Verse
 
 class VerseRVAdapter(
     private val context: Context,
+    private val verseClickInterface: VerseClickInterface
 ) : RecyclerView.Adapter<VerseRVAdapter.ViewHolder>() {
 
     private val surahVerses = ArrayList<Verse>()
@@ -25,11 +26,11 @@ class VerseRVAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val typeface: Typeface? = ResourcesCompat.getFont(context, R.font.alquran_indopak_by_quranwbw)
         val view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_verse, parent, false)
-        val viewHolder = ViewHolder(view)
-        viewHolder.arabic.typeface = typeface
-        return viewHolder
+        val typeface: Typeface? = ResourcesCompat.getFont(context, R.font.alquran_indopak_by_quranwbw)
+        return ViewHolder(view).apply {
+            arabic.typeface = typeface
+        }
     }
 
     override fun getItemCount(): Int = surahVerses.size
@@ -40,6 +41,10 @@ class VerseRVAdapter(
         holder.arabic.text = item.arabicIndopak
         holder.latin.text = item.latin
         holder.translation.text = item.translation
+
+        holder.itemView.setOnClickListener {
+            verseClickInterface.onVerseClick(item)
+        }
     }
 
     fun updateList(newList: List<Verse>) {
@@ -47,4 +52,10 @@ class VerseRVAdapter(
         surahVerses.addAll(newList)
         notifyDataSetChanged()
     }
+}
+
+interface VerseClickInterface {
+    // creating a method for click action
+    // on recycler view item for updating it.
+    fun onVerseClick(verse: Verse)
 }

@@ -13,18 +13,21 @@ class SurahActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySurahBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        copyDatabaseFromAssets()
+
         binding = ActivitySurahBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.apply {
-            val viewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, lifecycle).apply {
+        setupViewPager()
+        copyDatabaseFromAssets()
+    }
+
+    private fun setupViewPager() {
+        val viewPagerAdapter by lazy {
+            ViewPagerAdapter(supportFragmentManager, lifecycle).apply {
                 createFragment(SurahFragment())
-            } }
-            viewpager.apply {
-                adapter = viewPagerAdapter
             }
         }
+        binding.viewpager.adapter = viewPagerAdapter
     }
 
     private fun copyDatabaseFromAssets() {
