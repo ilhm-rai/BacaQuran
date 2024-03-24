@@ -9,42 +9,43 @@
     android:orientation="vertical"
     tools:context=".activity.VerseActivity">
 
-  <com.google.android.material.appbar.AppBarLayout
-      android:id="@+id/appbar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:fitsSystemWindows="true"
-      android:background="@color/dark_woodsmoke"
-      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Juz 1"
-        app:titleTextColor="@color/white"
-        android:alpha="0.8"
-        app:navigationIcon="@drawable/ic_action_back"
-        android:background="@color/light_woodsmoke"
-        android:minHeight="?attr/actionBarSize" />
+        android:background="@color/dark_woodsmoke"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:background="@color/light_woodsmoke"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_anchor="@+id/appbar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@drawable/ic_action_back"
+            app:title="Juz 1"
+            app:titleTextColor="@color/white" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_woodsmoke"
+            android:layoutDirection="rtl"
+            app:tabIndicatorColor="@color/stonewall"
+            app:tabMode="scrollable"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="@color/tab_text_color" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:tabIndicatorColor="@color/stonewall"
-        app:tabTextColor="@color/tab_text_color"
-        android:background="@color/light_woodsmoke"
-        android:layoutDirection="rtl"
-        app:tabMode="scrollable"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-  </com.google.android.material.appbar.AppBarLayout>
-
-  <androidx.viewpager2.widget.ViewPager2
-      android:id="@+id/viewpager"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:rotationY="180"/>
+        android:rotationY="180" />
 </LinearLayout>

@@ -48,6 +48,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     val activityVersion = "1.8.2"
     val appCompatVersion = "1.6.1"
     val constraintLayoutVersion = "2.1.4"
