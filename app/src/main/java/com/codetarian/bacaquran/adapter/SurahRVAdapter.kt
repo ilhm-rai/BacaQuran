@@ -16,43 +16,46 @@ class SurahRVAdapter(
     private val surahClickInterface: SurahClickInterface
 ) : RecyclerView.Adapter<SurahRVAdapter.ViewHolder>() {
 
-    private val allSurah = ArrayList<Surah>()
+    private val listSurah = ArrayList<Surah>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val surahId: TextView = itemView.findViewById(R.id.surahId)
-        val transliteration: TextView = itemView.findViewById(R.id.transliteration)
-        val surahInfo: TextView = itemView.findViewById(R.id.surah_info)
-        val arabic: TextView = itemView.findViewById(R.id.arabic)
+        val mTextViewSurahId: TextView = itemView.findViewById(R.id.text_surah_id)
+        val mTextViewTransliteration: TextView = itemView.findViewById(R.id.text_transliteration)
+        val mTextViewSurahInfo: TextView = itemView.findViewById(R.id.text_surah_info)
+        val mTextViewArabic: TextView = itemView.findViewById(R.id.text_arabic)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_surah, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_surah, parent, false)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = allSurah.size
+    override fun getItemCount(): Int = listSurah.size
 
     override fun onBindViewHolder(holder: SurahRVAdapter.ViewHolder, position: Int) {
-        val item = allSurah[position]
-        val surahInfo = "${item.translation} (${item.numAyah} Ayat)"
+        val item = listSurah[position]
 
-        holder.surahId.text = item.id.toString()
-        holder.transliteration.text = item.transliteration
-        holder.surahInfo.text = surahInfo
-        holder.arabic.text = item.quranSurahFont
+        with(holder) {
+            mTextViewSurahId.text = item.id.toString()
+            mTextViewTransliteration.text = item.transliteration
+            mTextViewArabic.text = item.quranSurahFont
 
-        val fontType = if (item.id < 60) R.font.quran_surah_1 else R.font.quran_surah_2
-        val typeface: Typeface? = ResourcesCompat.getFont(context, fontType)
-        holder.arabic.typeface = typeface
+            val surahInfo = "${item.translation} (${item.numAyah} Ayat)"
+            mTextViewSurahInfo.text = surahInfo
 
-        holder.itemView.setOnClickListener {
-            surahClickInterface.onSurahClick(allSurah[position])
+            val fontType = if (item.id < 60) R.font.quran_surah_1 else R.font.quran_surah_2
+            val typeface: Typeface? = ResourcesCompat.getFont(context, fontType)
+            mTextViewArabic.typeface = typeface
+
+            itemView.setOnClickListener {
+                surahClickInterface.onSurahClick(listSurah[position])
+            }
         }
     }
 
     fun updateList(newList: List<Surah>) {
-        allSurah.clear()
-        allSurah.addAll(newList)
+        listSurah.clear()
+        listSurah.addAll(newList)
         notifyDataSetChanged()
     }
 }

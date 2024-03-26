@@ -53,16 +53,16 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
     private fun setupHeaddress() {
         val ayah = "${surah.numAyah} Ayat"
         binding.apply {
-            headAyah.text = ayah
-            headLocation.text = surah.location
+            textHeadAyah.text = ayah
+            textHeadLocation.text = surah.location
+            textHeadSurah.text = surah.id.toString()
             mainContent.rotationY = 180f
-            headSurah.text = surah.id.toString()
         }
     }
 
     private fun setupBismillah() {
         if (surah.id == AL_FATIHAH || surah.id == AT_TAUBAH) {
-            binding.bismillahParent.visibility = View.GONE
+            binding.containerBismillah.visibility = View.GONE
         }
     }
 

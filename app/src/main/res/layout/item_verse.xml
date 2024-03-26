@@ -15,7 +15,7 @@
         android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/ayah"
+            android:id="@+id/text_ayah"
             android:layout_width="30dp"
             android:layout_height="36dp"
             android:layout_marginStart="8dp"
@@ -37,23 +37,18 @@
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ayah"
+            app:layout_constraintStart_toEndOf="@+id/text_ayah"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/arabic"
+                android:id="@+id/text_arabic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/alquran_indopak_by_quranwbw"
-                android:lineSpacingExtra="46sp"
-                android:lineSpacingMultiplier="0"
-                android:text="@string/ayah_arabic"
-                android:textColor="@color/white"
-                android:textDirection="rtl"
-                android:textSize="28sp" />
+                android:text="@string/ayah_arabic_indopak"
+                style="@style/AyahStyle" />
 
             <TextView
-                android:id="@+id/latin"
+                android:id="@+id/text_latin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -62,7 +57,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/translation"
+                android:id="@+id/text_translation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ayah_translation"

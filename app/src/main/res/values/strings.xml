@@ -2,7 +2,9 @@
     <string name="app_name">BacaQuran</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="ayah">1</string>
-    <string name="ayah_arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</string>
+    <string name="ayah_arabic_indopak">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</string>
+    <string name="ayah_arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</string>
+    <string name="transcription">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</string>
     <string name="ayah_latin">bismillāhir-raḥmānir-raḥīm</string>
     <string name="ayah_translation">Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang.</string>
     <string name="head_location">Makkiyah</string>
@@ -16,4 +18,9 @@
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
     <string name="bookmark">Bookmark</string>
+    <string name="levenshtein_distance">Distance: 0.85714287</string>
+    <string name="insert">Tambah</string>
+    <string name="delete">Hapus</string>
+    <string name="patch_word">Anda lupa membaca \'بِسْمِ اللّٰه\' pada ayat</string>
+    <string name="button_record">button record</string>
 </resources>

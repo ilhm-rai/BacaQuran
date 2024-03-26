@@ -19,17 +19,17 @@ class VerseRVAdapter(
     private val surahVerses = ArrayList<Verse>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val ayah: TextView = itemView.findViewById(R.id.ayah)
-        val arabic: TextView = itemView.findViewById(R.id.arabic)
-        val latin: TextView = itemView.findViewById(R.id.latin)
-        val translation: TextView = itemView.findViewById(R.id.translation)
+        val mTextViewAyah: TextView = itemView.findViewById(R.id.text_ayah)
+        val mTextViewArabic: TextView = itemView.findViewById(R.id.text_arabic)
+        val mTextViewLatin: TextView = itemView.findViewById(R.id.text_latin)
+        val mTextViewTranslation: TextView = itemView.findViewById(R.id.text_translation)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_verse, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_verse, parent, false)
         val typeface: Typeface? = ResourcesCompat.getFont(context, R.font.alquran_indopak_by_quranwbw)
         return ViewHolder(view).apply {
-            arabic.typeface = typeface
+            mTextViewArabic.typeface = typeface
         }
     }
 
@@ -37,13 +37,15 @@ class VerseRVAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = surahVerses[position]
-        holder.ayah.text = item.ayah.toString()
-        holder.arabic.text = item.arabicIndopak
-        holder.latin.text = item.latin
-        holder.translation.text = item.translation
+        with(holder) {
+            mTextViewAyah.text = item.ayah.toString()
+            mTextViewArabic.text = item.arabicIndopak
+            mTextViewLatin.text = item.latin
+            mTextViewTranslation.text = item.translation
 
-        holder.itemView.setOnClickListener {
-            verseClickInterface.onVerseClick(item)
+            itemView.setOnClickListener {
+                verseClickInterface.onVerseClick(item)
+            }
         }
     }
 

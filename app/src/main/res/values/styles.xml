@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AyahStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">28sp</item>
+        <item name="fontFamily">@font/alquran_indopak_by_quranwbw</item>
+        <item name="android:lineSpacingExtra">46sp</item>
+        <item name="android:lineSpacingMultiplier">0</item>
+        <item name="android:textDirection">anyRtl</item>
+    </style>
+</resources>

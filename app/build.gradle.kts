@@ -46,7 +46,6 @@ android {
 }
 
 dependencies {
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     val activityVersion = "1.8.2"
     val appCompatVersion = "1.6.1"
     val constraintLayoutVersion = "2.1.4"
@@ -61,11 +60,13 @@ dependencies {
     val androidxJunitVersion = "1.1.5"
 
     implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.appcompat:appcompat:${appCompatVersion}")
     implementation("com.google.android.material:material:${materialVersion}")
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("io.github.java-diff-utils:java-diff-utils:4.12")
 
     // Lifecycle Components
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")

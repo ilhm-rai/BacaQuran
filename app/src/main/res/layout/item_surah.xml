@@ -13,7 +13,7 @@
         android:background="@color/dark_woodsmoke">
 
         <TextView
-            android:id="@+id/surahId"
+            android:id="@+id/text_surah_id"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -34,12 +34,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/surahId"
-            app:layout_constraintStart_toEndOf="@+id/surahId"
-            app:layout_constraintTop_toTopOf="@+id/surahId">
+            app:layout_constraintBottom_toBottomOf="@+id/text_surah_id"
+            app:layout_constraintStart_toEndOf="@+id/text_surah_id"
+            app:layout_constraintTop_toTopOf="@+id/text_surah_id">
 
             <TextView
-                android:id="@+id/transliteration"
+                android:id="@+id/text_transliteration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -48,7 +48,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/surah_info"
+                android:id="@+id/text_surah_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-smallcaps"
@@ -59,7 +59,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/arabic"
+            android:id="@+id/text_arabic"
             android:layout_width="104dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
