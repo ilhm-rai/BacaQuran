@@ -86,13 +86,14 @@
         android:id="@+id/button_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/persian_green"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
         android:contentDescription="@string/button_record"
+        android:onClick="onRecordClick"
+        app:backgroundTint="@color/cinnabar"
+        app:borderWidth="0dp"
         app:fabSize="normal"
-        app:tint="@color/dark_woodsmoke"
-        app:srcCompat="@drawable/ic_action_record" />
+        app:srcCompat="@drawable/ic_action_recording"
+        app:tint="@color/white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

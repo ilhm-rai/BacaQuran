@@ -43,6 +43,9 @@ android {
             excludes.add("META-INF/atomicfu.kotlin_module")
         }
     }
+    androidResources {
+        noCompress += "tflite"
+    }
 }
 
 dependencies {
@@ -89,6 +92,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22")
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}")
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}")
+
+    // DeepSpeech
+    implementation("org.deepspeech:libdeepspeech:0.9.3")
 
     testImplementation("junit:junit:${junitVersion}")
     androidTestImplementation("androidx.arch.core:core-testing:${coreTestingVersion}")
