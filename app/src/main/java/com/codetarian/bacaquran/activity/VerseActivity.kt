@@ -2,18 +2,22 @@ package com.codetarian.bacaquran.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.codetarian.bacaquran.adapter.ViewPagerAdapter
 import com.codetarian.bacaquran.databinding.ActivityVerseBinding
 import com.codetarian.bacaquran.domain.Surah
 import com.codetarian.bacaquran.fragment.VerseFragment
+import com.codetarian.bacaquran.fragment.VerseFragment.VerseFragmentListener
 import com.codetarian.bacaquran.viewmodel.SurahViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
-class VerseActivity : AppCompatActivity() {
+class VerseActivity : AppCompatActivity(), VerseFragmentListener {
 
     private lateinit var binding: ActivityVerseBinding
     private lateinit var viewModel: SurahViewModel
+    private lateinit var listSurah: List<Surah>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,6 +25,7 @@ class VerseActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = null
 
         viewModel = ViewModelProvider(
             this,
@@ -29,12 +34,11 @@ class VerseActivity : AppCompatActivity() {
 
         viewModel.allSurah.observe(this) { list ->
             list?.let {
-                setupViewPager(it)
-                setupTabLayout(it)
+                listSurah = it
+                setupViewPager()
+                setupTabLayout()
             }
         }
-
-        binding.toolbar.title = "Juz 1"
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -42,16 +46,29 @@ class VerseActivity : AppCompatActivity() {
         return true
     }
 
-    private fun setupTabLayout(list: List<Surah>) {
+    override fun onTitleChanged(title: String) {
+        supportActionBar?.title = title
+    }
+
+    override fun onPageChange(nestedScrollView: NestedScrollView) {
+        binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                nestedScrollView.scrollTo(0, 0)
+                supportActionBar?.title = "Juz ${listSurah[position].firstJuz}"
+            }
+        })
+    }
+
+    private fun setupTabLayout() {
         TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->
-            tab.text = "${list[position].id}. ${list[position].transliteration}"
+            tab.text = "${listSurah[position].id}. ${listSurah[position].transliteration}"
         }.attach()
     }
 
-    private fun setupViewPager(list: List<Surah>) {
+    private fun setupViewPager() {
         val viewPagerAdapter by lazy {
             ViewPagerAdapter(supportFragmentManager, lifecycle).apply {
-                createFragment(list.map { surah -> VerseFragment(surah) })
+                createFragment(listSurah.map { surah -> VerseFragment(surah) })
             }
         }
         val surahId = intent.getIntExtra(EXTRA_SURAH_ID, 1) - 1

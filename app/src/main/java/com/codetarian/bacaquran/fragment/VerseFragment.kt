@@ -1,6 +1,7 @@
 package com.codetarian.bacaquran.fragment
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,6 +20,7 @@ import com.codetarian.bacaquran.adapter.VerseRVAdapter
 import com.codetarian.bacaquran.databinding.FragmentVerseBinding
 import com.codetarian.bacaquran.domain.Surah
 import com.codetarian.bacaquran.domain.Verse
+import com.codetarian.bacaquran.ext.forEachVisibleHolder
 import com.codetarian.bacaquran.viewmodel.VerseViewModel
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -41,6 +44,7 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
         viewModel.loadVersesBySurah(surah.id).observe(viewLifecycleOwner) { list ->
             list?.let {
                 setupRecyclerView(it)
+                setupToolbarTitle()
             }
         }
 
@@ -48,6 +52,11 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
         setupBismillah()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as? VerseFragmentListener)?.onPageChange(binding.nestedScrollView)
     }
 
     private fun setupHeaddress() {
@@ -86,6 +95,28 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
         ViewCompat.setNestedScrollingEnabled(binding.recyclerview, false)
     }
 
+    private fun setupToolbarTitle() {
+        val scrollBounds = Rect()
+        val adapter = binding.recyclerview.adapter as VerseRVAdapter
+        binding.nestedScrollView.setOnScrollChangeListener { _, _, _, _, _ ->
+            binding.nestedScrollView.getDrawingRect(scrollBounds)
+            binding.recyclerview.forEachVisibleHolder { holder ->
+                val itemView = holder.itemView
+                val isVisible = itemView.getLocalVisibleRect(scrollBounds)
+
+                if (isVisible) {
+                    val visibleWidth = scrollBounds.width()
+                    val fullyVisible = visibleWidth >= itemView.width
+
+                    if (fullyVisible) {
+                        val item = adapter.getItem(holder.adapterPosition)
+                        (activity as? VerseFragmentListener)?.onTitleChanged("Juz ${item.juz}")
+                    }
+                }
+            }
+        }
+    }
+
     override fun onVerseClick(verse: Verse) {
         val recitationActivity = Intent(context, RecitationActivity::class.java)
         recitationActivity.putExtra(RecitationActivity.EXTRA_SURAH_NAME, surah.transliteration)
@@ -106,5 +137,10 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
     companion object {
         const val AL_FATIHAH = 1
         const val AT_TAUBAH = 9
+    }
+
+    interface VerseFragmentListener {
+        fun onTitleChanged(title: String)
+        fun onPageChange(nestedScrollView: NestedScrollView)
     }
 }

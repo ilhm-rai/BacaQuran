@@ -54,6 +54,8 @@ class VerseRVAdapter(
         surahVerses.addAll(newList)
         notifyDataSetChanged()
     }
+
+    fun getItem(position: Int) = surahVerses[position]
 }
 
 interface VerseClickInterface {

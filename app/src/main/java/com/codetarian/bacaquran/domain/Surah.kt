@@ -17,5 +17,6 @@ data class Surah(
     @ColumnInfo(name = "num_ayah") var numAyah: Int,
     @ColumnInfo(name = "page") var page: Int,
     @ColumnInfo(name = "location") var location: String,
+    @ColumnInfo(name = "first_juz") var firstJuz: Int,
     @ColumnInfo(name = "updated_at") var updatedAt: String?
 ) : Parcelable

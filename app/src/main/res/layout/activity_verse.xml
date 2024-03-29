@@ -27,7 +27,7 @@
             app:layout_anchor="@+id/appbar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="@drawable/ic_action_back"
-            app:title="Juz 1"
+            tools:title="Juz 1"
             app:titleTextColor="@color/white" />
 
         <com.google.android.material.tabs.TabLayout
