@@ -68,7 +68,7 @@ class RecitationActivity : AppCompatActivity() {
     private fun setupVerseLayout() {
         binding.verseBinding.apply {
             textAyah.text = verse.ayah.toString()
-            textArabic.text = verse.arabic
+            textArabic.text = verse.arabicIndopak
             textLatin.text = verse.latin
             textTranslation.text = verse.translation
         }

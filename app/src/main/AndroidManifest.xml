@@ -22,7 +22,7 @@
             android:name=".activity.VerseActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SurahActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

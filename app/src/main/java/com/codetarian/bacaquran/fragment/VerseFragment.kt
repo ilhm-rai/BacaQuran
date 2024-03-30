@@ -21,14 +21,14 @@ import com.codetarian.bacaquran.databinding.FragmentVerseBinding
 import com.codetarian.bacaquran.domain.Surah
 import com.codetarian.bacaquran.domain.Verse
 import com.codetarian.bacaquran.ext.forEachVisibleHolder
-import com.codetarian.bacaquran.viewmodel.VerseViewModel
+import com.codetarian.bacaquran.viewmodel.QuranViewModel
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper
 
 class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
 
     private lateinit var binding: FragmentVerseBinding
-    private lateinit var viewModel: VerseViewModel
+    private lateinit var viewModel: QuranViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        )[VerseViewModel::class.java]
+        )[QuranViewModel::class.java]
 
         viewModel.loadVersesBySurah(surah.id).observe(viewLifecycleOwner) { list ->
             list?.let {
@@ -81,7 +81,7 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
         val verseRVAdapter by lazy { VerseRVAdapter(this.requireContext(), this) }
         verseRVAdapter.updateList(list)
 
-        binding.recyclerview.apply {
+        binding.rvVerse.apply {
             adapter = verseRVAdapter
             layoutManager = linearLayoutManager
             addItemDecoration(
@@ -92,15 +92,15 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
             )
             isNestedScrollingEnabled = false
         }
-        ViewCompat.setNestedScrollingEnabled(binding.recyclerview, false)
+        ViewCompat.setNestedScrollingEnabled(binding.rvVerse, false)
     }
 
     private fun setupToolbarTitle() {
         val scrollBounds = Rect()
-        val adapter = binding.recyclerview.adapter as VerseRVAdapter
+        val adapter = binding.rvVerse.adapter as VerseRVAdapter
         binding.nestedScrollView.setOnScrollChangeListener { _, _, _, _, _ ->
             binding.nestedScrollView.getDrawingRect(scrollBounds)
-            binding.recyclerview.forEachVisibleHolder { holder ->
+            binding.rvVerse.forEachVisibleHolder { holder ->
                 val itemView = holder.itemView
                 val isVisible = itemView.getLocalVisibleRect(scrollBounds)
 

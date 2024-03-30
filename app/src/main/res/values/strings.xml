@@ -14,7 +14,7 @@
     <string name="surah_arabic">1</string>
     <string name="surah_info">Pembukaan (7 Ayat)</string>
     <string name="surah_latin">Al-Fatihah</string>
-    <string name="surah_number">1</string>
+    <string name="number">1</string>
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
     <string name="bookmark">Bookmark</string>
@@ -23,4 +23,6 @@
     <string name="delete">Hapus</string>
     <string name="patch_word">Anda lupa membaca \'بِسْمِ اللّٰه\' pada ayat</string>
     <string name="button_record">button record</string>
+    <string name="juz_title">Juz 1</string>
+    <string name="juz_content">Al-Fatihah 1 - Al-Baqarah 141</string>
 </resources>

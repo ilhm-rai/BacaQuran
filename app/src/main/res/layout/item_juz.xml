@@ -13,7 +13,7 @@
         android:background="@color/dark_woodsmoke">
 
         <TextView
-            android:id="@+id/text_surah_id"
+            android:id="@+id/text_juz"
             android:layout_width="30dp"
             android:layout_height="36dp"
             android:layout_marginStart="16dp"
@@ -28,50 +28,33 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/text_surah_id"
-            app:layout_constraintStart_toEndOf="@+id/text_surah_id"
-            app:layout_constraintTop_toTopOf="@+id/text_surah_id">
+            app:layout_constraintBottom_toBottomOf="@+id/text_juz"
+            app:layout_constraintStart_toEndOf="@+id/text_juz"
+            app:layout_constraintTop_toTopOf="@+id/text_juz">
 
             <TextView
-                android:id="@+id/text_transliteration"
+                android:id="@+id/text_juz_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="@string/surah_latin"
+                android:text="@string/juz_title"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_surah_info"
+                android:id="@+id/text_juz_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/surah_info"
+                android:text="@string/juz_content"
                 android:textColor="@color/stonewall"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/text_arabic"
-            android:layout_width="104dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/quran_surah_1"
-            android:gravity="center"
-            android:paddingTop="12dp"
-            android:text="@string/surah_arabic"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="54sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

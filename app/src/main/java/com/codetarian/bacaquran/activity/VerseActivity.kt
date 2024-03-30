@@ -10,13 +10,13 @@ import com.codetarian.bacaquran.databinding.ActivityVerseBinding
 import com.codetarian.bacaquran.domain.Surah
 import com.codetarian.bacaquran.fragment.VerseFragment
 import com.codetarian.bacaquran.fragment.VerseFragment.VerseFragmentListener
-import com.codetarian.bacaquran.viewmodel.SurahViewModel
+import com.codetarian.bacaquran.viewmodel.QuranViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 class VerseActivity : AppCompatActivity(), VerseFragmentListener {
 
     private lateinit var binding: ActivityVerseBinding
-    private lateinit var viewModel: SurahViewModel
+    private lateinit var viewModel: QuranViewModel
     private lateinit var listSurah: List<Surah>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +30,9 @@ class VerseActivity : AppCompatActivity(), VerseFragmentListener {
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[SurahViewModel::class.java]
+        )[QuranViewModel::class.java]
 
-        viewModel.allSurah.observe(this) { list ->
+        viewModel.loadSurahData().observe(this) { list ->
             list?.let {
                 listSurah = it
                 setupViewPager()

@@ -2,11 +2,14 @@ package com.codetarian.bacaquran.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.codetarian.bacaquran.R
 import com.codetarian.bacaquran.adapter.ViewPagerAdapter
 import com.codetarian.bacaquran.constant.ModelConstants
-import com.codetarian.bacaquran.databinding.ActivitySurahBinding
+import com.codetarian.bacaquran.databinding.ActivityMainBinding
+import com.codetarian.bacaquran.fragment.JuzFragment
 import com.codetarian.bacaquran.fragment.SurahFragment
 import com.codetarian.bacaquran.util.AssetUtil
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,16 +17,17 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-class SurahActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySurahBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivitySurahBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupViewPager()
+        setupTabLayout()
 
         CoroutineScope(Dispatchers.IO).launch {
             copyModelsFromAssets()
@@ -31,10 +35,22 @@ class SurahActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupTabLayout() {
+        TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->
+            val resId = when(position) {
+                0 -> R.string.surah
+                1 -> R.string.juz
+                else -> R.string.bookmark
+            }
+            tab.setText(resId)
+        }.attach()
+    }
+
     private fun setupViewPager() {
         val viewPagerAdapter by lazy {
             ViewPagerAdapter(supportFragmentManager, lifecycle).apply {
                 createFragment(SurahFragment())
+                createFragment(JuzFragment())
             }
         }
         binding.viewpager.adapter = viewPagerAdapter
@@ -61,7 +77,7 @@ class SurahActivity : AppCompatActivity() {
             folder.mkdirs()
         }
         AssetUtil.copyAssets(
-            this@SurahActivity,
+            this@MainActivity,
             arrayOf(ModelConstants.TFLITE_MODEL_FILENAME, ModelConstants.SCORER_FILENAME)
         )
     }
