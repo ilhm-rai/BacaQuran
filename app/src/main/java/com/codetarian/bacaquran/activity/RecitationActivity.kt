@@ -150,7 +150,7 @@ class RecitationActivity : AppCompatActivity() {
 
     private fun transcribe() {
         // We read from the recorder in chunks of 6144 shorts. With a model that expects its input
-        // at 16000Hz, this corresponds to 2048/16000 = 0.384s or 384ms.
+        // at 16000Hz, this corresponds to 6144/16000 = 0.384s or 384ms.
         val audioBufferSize = 6144
         val audioData = ShortArray(audioBufferSize)
 
@@ -184,6 +184,7 @@ class RecitationActivity : AppCompatActivity() {
             runOnUiThread {
                 binding.buttonRecord.setImageResource(R.drawable.ic_action_recording)
                 transcription = decoded
+                showReciteValidation()
             }
 
             recorder.stop()
@@ -230,7 +231,6 @@ class RecitationActivity : AppCompatActivity() {
 
         if (isRecording.get()) {
             stopListening()
-            showReciteValidation()
         } else {
             if (checkPermission()) {
                 startListening()

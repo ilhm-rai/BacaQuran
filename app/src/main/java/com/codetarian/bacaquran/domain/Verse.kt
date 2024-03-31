@@ -12,6 +12,7 @@ data class Verse(
     @PrimaryKey @ColumnInfo(name = "id") var id: Int,
     @ColumnInfo(name = "surah_id") var surahId: Int,
     @ColumnInfo(name = "ayah") var ayah: Int,
+    @ColumnInfo(name = "avg_timing") var avgTiming: Float,
     @ColumnInfo(name = "juz") var juz: Int,
     @ColumnInfo(name = "arabic") var arabic: String,
     @ColumnInfo(name = "arabic_indopak") var arabicIndopak: String,

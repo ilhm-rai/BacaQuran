@@ -8,7 +8,7 @@ import com.codetarian.bacaquran.dao.QuranDao
 import com.codetarian.bacaquran.domain.Surah
 import com.codetarian.bacaquran.domain.Verse
 
-@Database(entities = [Surah::class, Verse::class], version = 2, exportSchema = false)
+@Database(entities = [Surah::class, Verse::class], version = 4, exportSchema = false)
 abstract class QuranDatabase : RoomDatabase() {
 
     abstract fun getQuranDao(): QuranDao
