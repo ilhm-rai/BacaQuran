@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.codetarian.bacaquran.ui.adapter.JuzRVAdapter
 import com.codetarian.bacaquran.databinding.FragmentJuzBinding
-import com.codetarian.bacaquran.db.entity.Juz
+import com.codetarian.bacaquran.ui.adapter.JuzRVAdapter
 import com.codetarian.bacaquran.ui.viewmodel.QuranViewModel
+import com.codetarian.bacaquran.utils.Coroutines
 
 class JuzFragment : Fragment() {
 
+    private val viewModel by viewModels<QuranViewModel>()
     private lateinit var binding: FragmentJuzBinding
-    private lateinit var viewModel: QuranViewModel
+    private lateinit var juzRVAdapter: JuzRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,27 +25,17 @@ class JuzFragment : Fragment() {
     ): View? {
         binding = FragmentJuzBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        )[QuranViewModel::class.java]
+        juzRVAdapter = JuzRVAdapter(requireContext()) {}
 
-        viewModel.loadJuzData().observe(viewLifecycleOwner) { list ->
-            list?.let {
-                setupRecyclerView(it)
-            }
-        }
-
+        setupRecyclerView()
+        observeJuz()
         return binding.root
     }
 
-    private fun setupRecyclerView(list: List<Juz>) {
-
+    private fun setupRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val surahRVAdapter = createJuzRVAdapter(list)
 
         binding.rvJuz.apply {
-            adapter = surahRVAdapter
             layoutManager = linearLayoutManager
             addItemDecoration(
                 DividerItemDecoration(
@@ -52,12 +43,15 @@ class JuzFragment : Fragment() {
                     linearLayoutManager.orientation
                 )
             )
+            adapter = juzRVAdapter
         }
     }
 
-    private fun createJuzRVAdapter(list: List<Juz>): JuzRVAdapter {
-        return JuzRVAdapter(requireContext()).apply {
-            updateList(list)
+    fun observeJuz() {
+        Coroutines.main {
+            viewModel.loadJuzData().observe(viewLifecycleOwner) {
+                juzRVAdapter.submitList(it)
+            }
         }
     }
 }

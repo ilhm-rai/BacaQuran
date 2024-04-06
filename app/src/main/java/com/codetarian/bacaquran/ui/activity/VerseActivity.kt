@@ -1,23 +1,23 @@
 package com.codetarian.bacaquran.ui.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
-import com.codetarian.bacaquran.ui.adapter.ViewPagerAdapter
 import com.codetarian.bacaquran.databinding.ActivityVerseBinding
-import com.codetarian.bacaquran.db.entity.Surah
-import com.codetarian.bacaquran.ui.fragment.VerseFragment
+import com.codetarian.bacaquran.ui.adapter.VersePagerAdapter
 import com.codetarian.bacaquran.ui.fragment.VerseFragment.VerseFragmentListener
 import com.codetarian.bacaquran.ui.viewmodel.QuranViewModel
+import com.codetarian.bacaquran.utils.Coroutines
+import com.codetarian.bacaquran.utils.constant.StringConstants
 import com.google.android.material.tabs.TabLayoutMediator
 
 class VerseActivity : AppCompatActivity(), VerseFragmentListener {
 
+    private val viewModel by viewModels<QuranViewModel>()
     private lateinit var binding: ActivityVerseBinding
-    private lateinit var viewModel: QuranViewModel
-    private lateinit var listSurah: List<Surah>
+    private lateinit var versePagerAdapter: VersePagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,18 +27,11 @@ class VerseActivity : AppCompatActivity(), VerseFragmentListener {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = null
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[QuranViewModel::class.java]
+        versePagerAdapter = VersePagerAdapter(supportFragmentManager, lifecycle)
+        binding.viewpager.adapter = versePagerAdapter
 
-        viewModel.loadSurahData().observe(this) { list ->
-            list?.let {
-                listSurah = it
-                setupViewPager()
-                setupTabLayout()
-            }
-        }
+        setupTabLayout()
+        setupVerseViewPager()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -54,30 +47,25 @@ class VerseActivity : AppCompatActivity(), VerseFragmentListener {
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 nestedScrollView.scrollTo(0, 0)
-                supportActionBar?.title = "Juz ${listSurah[position].firstJuz}"
+                supportActionBar?.title = String.format(StringConstants.JUZ_TITLE, versePagerAdapter.getSurah(position).firstJuz)
             }
         })
     }
 
     private fun setupTabLayout() {
         TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->
-            tab.text = "${listSurah[position].id}. ${listSurah[position].transliteration}"
+            tab.text = "${versePagerAdapter.getSurah(position).id}. ${versePagerAdapter.getSurah(position).transliteration}"
         }.attach()
     }
 
-    private fun setupViewPager() {
-        val viewPagerAdapter by lazy {
-            ViewPagerAdapter(supportFragmentManager, lifecycle).apply {
-                createFragment(listSurah.map { surah -> VerseFragment(surah) })
-            }
-        }
-        val surahId = intent.getIntExtra(EXTRA_SURAH_ID, 1) - 1
-        binding.apply {
-            viewpager.adapter = viewPagerAdapter
-            viewpager.post {
-                tabs.setScrollPosition(surahId, 0f, true)
-                tabs.getTabAt(surahId)?.select()
-                viewpager.setCurrentItem(surahId, false)
+    private fun setupVerseViewPager() {
+        Coroutines.main {
+            viewModel.loadSurahData().observe(this@VerseActivity) { surahList ->
+                versePagerAdapter.submitList(surahList)
+                val position = intent.getIntExtra(EXTRA_SURAH_ID, 1) - 1
+                supportActionBar?.title = "Juz ${surahList[position].firstJuz}"
+                binding.viewpager.setCurrentItem(position, false)
+                binding.tabs.setScrollPosition(position, 0f, true)
             }
         }
     }

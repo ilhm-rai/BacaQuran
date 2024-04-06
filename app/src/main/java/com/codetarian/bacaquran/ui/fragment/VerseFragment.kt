@@ -1,34 +1,31 @@
 package com.codetarian.bacaquran.ui.fragment
 
-import android.content.Intent
 import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.codetarian.bacaquran.ui.activity.RecitationActivity
-import com.codetarian.bacaquran.ui.adapter.VerseClickInterface
-import com.codetarian.bacaquran.ui.adapter.VerseRVAdapter
 import com.codetarian.bacaquran.databinding.FragmentVerseBinding
 import com.codetarian.bacaquran.db.entity.Surah
-import com.codetarian.bacaquran.db.entity.Verse
-import com.codetarian.bacaquran.utils.ext.forEachVisibleHolder
+import com.codetarian.bacaquran.ui.activity.RecitationActivity
+import com.codetarian.bacaquran.ui.adapter.VerseRVAdapter
 import com.codetarian.bacaquran.ui.viewmodel.QuranViewModel
-import com.fasterxml.jackson.core.JsonProcessingException
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.codetarian.bacaquran.utils.Coroutines
+import com.codetarian.bacaquran.utils.UtilExtensions.openActivity
+import com.codetarian.bacaquran.utils.constant.StringConstants
+import com.codetarian.bacaquran.utils.ext.forEachVisibleHolder
 
-class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
+class VerseFragment(val surah: Surah) : Fragment() {
 
+    private val viewModel by viewModels<QuranViewModel>()
     private lateinit var binding: FragmentVerseBinding
-    private lateinit var viewModel: QuranViewModel
+    private lateinit var verseRVAdapter: VerseRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,21 +33,15 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
     ): View? {
         binding = FragmentVerseBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        )[QuranViewModel::class.java]
-
-        viewModel.loadVersesBySurah(surah.id).observe(viewLifecycleOwner) { list ->
-            list?.let {
-                setupRecyclerView(it)
-                setupToolbarTitle()
+        verseRVAdapter = VerseRVAdapter(requireContext()) {
+            openActivity(RecitationActivity::class.java) {
+                putParcelable(RecitationActivity.EXTRA_VERSE, it)
+                putString(RecitationActivity.EXTRA_SURAH_NAME, surah.transliteration)
             }
         }
 
-        setupHeaddress()
-        setupBismillah()
-
+        initView()
+        observeVerses()
         return binding.root
     }
 
@@ -75,14 +66,9 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
         }
     }
 
-    private fun setupRecyclerView(list: List<Verse>) {
+    private fun setupRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        val verseRVAdapter by lazy { VerseRVAdapter(this.requireContext(), this) }
-        verseRVAdapter.updateList(list)
-
         binding.rvVerse.apply {
-            adapter = verseRVAdapter
             layoutManager = linearLayoutManager
             addItemDecoration(
                 DividerItemDecoration(
@@ -91,13 +77,13 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
                 )
             )
             isNestedScrollingEnabled = false
+            adapter = verseRVAdapter
         }
         ViewCompat.setNestedScrollingEnabled(binding.rvVerse, false)
     }
 
-    private fun setupToolbarTitle() {
+    private fun setupToolbar() {
         val scrollBounds = Rect()
-        val adapter = binding.rvVerse.adapter as VerseRVAdapter
         binding.nestedScrollView.setOnScrollChangeListener { _, _, _, _, _ ->
             binding.nestedScrollView.getDrawingRect(scrollBounds)
             binding.rvVerse.forEachVisibleHolder { holder ->
@@ -109,29 +95,27 @@ class VerseFragment(val surah: Surah) : Fragment(), VerseClickInterface {
                     val fullyVisible = visibleWidth >= itemView.width
 
                     if (fullyVisible) {
-                        val item = adapter.getItem(holder.adapterPosition)
-                        (activity as? VerseFragmentListener)?.onTitleChanged("Juz ${item.juz}")
+                        val item = verseRVAdapter.currentList[holder.adapterPosition]
+                        (activity as? VerseFragmentListener)?.onTitleChanged(String.format(StringConstants.JUZ_TITLE, item.juz))
                     }
                 }
             }
         }
     }
 
-    override fun onVerseClick(verse: Verse) {
-        val recitationActivity = Intent(context, RecitationActivity::class.java)
-        recitationActivity.putExtra(RecitationActivity.EXTRA_SURAH_NAME, surah.transliteration)
-        if (Build.VERSION.SDK_INT >= 33) {
-            recitationActivity.putExtra(RecitationActivity.EXTRA_VERSE, verse)
-        } else {
-            val objectMapper = ObjectMapper()
-            try {
-                val jsonVerse = objectMapper.writeValueAsString(verse)
-                recitationActivity.putExtra(RecitationActivity.EXTRA_VERSE, jsonVerse)
-            } catch (e: JsonProcessingException) {
-                Log.e("ERROR", "${e.message}")
+    fun initView() {
+        setupHeaddress()
+        setupBismillah()
+        setupRecyclerView()
+        setupToolbar()
+    }
+
+    private fun observeVerses() {
+        Coroutines.main {
+            viewModel.loadVersesBySurah(surah.id).observe(viewLifecycleOwner) {
+                verseRVAdapter.submitList(it)
             }
         }
-        startActivity(recitationActivity)
     }
 
     companion object {
