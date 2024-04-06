@@ -57,6 +57,7 @@ dependencies {
     val lifecycleVersion = "2.7.0"
     val materialVersion = "1.11.0"
     val roomVersion = "2.6.1"
+    val hiltVersion = "2.45"
     // testing
     val junitVersion = "4.13.2"
     val espressoVersion = "3.5.1"
@@ -92,9 +93,15 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22")
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}")
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}")
+    implementation("javax.inject:javax.inject:1")
 
     // DeepSpeech
     implementation("org.deepspeech:libdeepspeech:0.9.3")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
 
     testImplementation("junit:junit:${junitVersion}")
     androidTestImplementation("androidx.arch.core:core-testing:${coreTestingVersion}")

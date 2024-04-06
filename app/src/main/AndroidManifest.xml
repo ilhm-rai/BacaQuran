@@ -16,13 +16,13 @@
         android:theme="@style/Theme.BacaQuran"
         tools:targetApi="31">
         <activity
-            android:name=".activity.RecitationActivity"
+            android:name=".ui.activity.RecitationActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.VerseActivity"
+            android:name=".ui.activity.VerseActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

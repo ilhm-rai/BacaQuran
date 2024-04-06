@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_woodsmoke"
     android:orientation="vertical"
-    tools:context=".activity.VerseActivity">
+    tools:context=".ui.activity.VerseActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
