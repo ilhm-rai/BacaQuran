@@ -5,15 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.codetarian.bacaquran.R
 import com.codetarian.bacaquran.databinding.ActivityMainBinding
 import com.codetarian.bacaquran.ui.adapter.ViewPagerAdapter
+import com.codetarian.bacaquran.ui.fragment.BookmarkFragment
 import com.codetarian.bacaquran.ui.fragment.JuzFragment
 import com.codetarian.bacaquran.ui.fragment.SurahFragment
 import com.codetarian.bacaquran.utils.AssetUtil
+import com.codetarian.bacaquran.utils.Coroutines
 import com.codetarian.bacaquran.utils.constant.ModelConstants
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -32,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         setupViewPager()
         setupTabLayout()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            copyModelsFromAssets()
-            copyDatabaseFromAssets()
+        Coroutines.io {
+            //copyModelsFromAssets()
+            //copyDatabaseFromAssets()
         }
     }
 
@@ -54,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             ViewPagerAdapter(supportFragmentManager, lifecycle).apply {
                 createFragment(SurahFragment())
                 createFragment(JuzFragment())
+                createFragment(BookmarkFragment())
             }
         }
         binding.viewpager.adapter = viewPagerAdapter
@@ -61,16 +61,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun copyDatabaseFromAssets() {
         val databaseFile = getDatabasePath("quran_database.db")
-        if (!databaseFile.exists()) {
-            try {
-                val inputStream = assets.open("quran_database.db")
-                val outputStream = FileOutputStream(databaseFile)
-                inputStream.copyTo(outputStream)
-                inputStream.close()
-                outputStream.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+        try {
+            val inputStream = assets.open("quran_database.db")
+            val outputStream = FileOutputStream(databaseFile)
+            inputStream.copyTo(outputStream)
+            inputStream.close()
+            outputStream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 

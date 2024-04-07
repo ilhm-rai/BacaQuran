@@ -33,12 +33,20 @@ class VerseFragment(val surah: Surah) : Fragment() {
     ): View? {
         binding = FragmentVerseBinding.inflate(inflater, container, false)
 
-        verseRVAdapter = VerseRVAdapter(requireContext()) {
-            openActivity(RecitationActivity::class.java) {
-                putParcelable(RecitationActivity.EXTRA_VERSE, it)
-                putString(RecitationActivity.EXTRA_SURAH_NAME, surah.transliteration)
+        verseRVAdapter = VerseRVAdapter(
+            context = requireContext(),
+            onItemClicked = {
+                openActivity(RecitationActivity::class.java) {
+                    putParcelable(RecitationActivity.EXTRA_VERSE, it)
+                    putString(RecitationActivity.EXTRA_SURAH_NAME, surah.transliteration)
+                }
+            },
+            onBookmarkClicked = {
+                Coroutines.io {
+                    viewModel.updateVerseBookmark(it.id)
+                }
             }
-        }
+        )
 
         initView()
         observeVerses()

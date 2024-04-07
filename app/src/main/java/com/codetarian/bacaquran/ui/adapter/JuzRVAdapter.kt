@@ -11,11 +11,11 @@ import com.codetarian.bacaquran.db.entity.Juz
 
 class JuzRVAdapter(
     private val context: Context,
-    private val listener: (Juz) -> Unit
+    private val onItemClicked: (Juz) -> Unit
 ) : ListAdapter<Juz, JuzRVAdapter.ViewHolder>(DiffUtilJuz()) {
 
     inner class ViewHolder(private val binding: ItemJuzBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindItem(juz: Juz, listener: (Juz) -> Unit) {
+        fun bindItem(juz: Juz, onItemClicked: (Juz) -> Unit) {
             binding.apply {
                 textJuz.text = juz.juz.toString()
                 val juzTitle = "Juz ${juz.juz}"
@@ -34,7 +34,7 @@ class JuzRVAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bindItem(item, listener)
+        holder.bindItem(item, onItemClicked)
     }
 
 

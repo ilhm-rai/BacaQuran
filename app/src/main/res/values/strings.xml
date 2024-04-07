@@ -25,4 +25,7 @@
     <string name="button_record">button record</string>
     <string name="juz_title">Juz 1</string>
     <string name="juz_content">Al-Fatihah 1 - Al-Baqarah 141</string>
+    <string name="add_or_delete_bookmark">Tambah atau Hapus Bookmrk</string>
+    <string name="bookmarked_at">6 hari yang lalu</string>
+    <string name="bookmarked_verse">QS. Al-\'Ankabut: Ayat 69 (Juz 21)</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.codetarian.bacaquran.db.QuranDatabase
 import com.codetarian.bacaquran.db.entity.Juz
 import com.codetarian.bacaquran.db.entity.Surah
+import com.codetarian.bacaquran.db.entity.VerseAndSurah
 import com.codetarian.bacaquran.db.repository.QuranRepositoryImpl
 
 class QuranViewModel(application: Application) : AndroidViewModel(application) {
@@ -22,4 +23,8 @@ class QuranViewModel(application: Application) : AndroidViewModel(application) {
     fun loadJuzData(): LiveData<List<Juz>> = repository.observeAllJuz()
 
     fun loadVersesBySurah(surahId: Int) = repository.observeVersesBySurahId(surahId)
+
+    fun loadBookmarkedVerses(): LiveData<List<VerseAndSurah>> = repository.observeBookmarkedVerses()
+
+    suspend fun updateVerseBookmark(verseId: Int) = repository.updateVerseBookmark(verseId)
 }

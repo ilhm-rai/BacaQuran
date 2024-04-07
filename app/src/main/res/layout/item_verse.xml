@@ -29,7 +29,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/ib_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="@+id/text_ayah"
+            app:layout_constraintStart_toStartOf="@+id/text_ayah"
+            app:layout_constraintTop_toBottomOf="@+id/text_ayah"
+            app:srcCompat="@drawable/selector_ic_bookmark"
+            android:contentDescription="@string/add_or_delete_bookmark" />
+
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -42,10 +55,10 @@
 
             <TextView
                 android:id="@+id/text_arabic"
+                style="@style/AyahStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ayah_arabic_indopak"
-                style="@style/AyahStyle" />
+                android:text="@string/ayah_arabic_indopak" />
 
             <TextView
                 android:id="@+id/text_latin"

@@ -11,19 +11,24 @@ import com.codetarian.bacaquran.db.entity.Verse
 
 class VerseRVAdapter(
     private val context: Context,
-    private val listener: (Verse) -> Unit
+    private val onItemClicked: (Verse) -> Unit,
+    private val onBookmarkClicked: (Verse) -> Unit
 ) : ListAdapter<Verse, VerseRVAdapter.VerseViewHolder>(DiffUtilVerse()) {
 
     inner class VerseViewHolder(private val binding: ItemVerseBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindItem(verse: Verse, listener: (Verse) -> Unit) {
+        fun bindItem(verse: Verse, onItemClicked: (Verse) -> Unit, onBookmarkClicked: (Verse) -> Unit) {
             binding.apply {
                 textAyah.text = verse.ayah.toString()
                 textArabic.text = verse.arabicIndopak
                 textLatin.text = verse.latin
                 textTranslation.text = verse.translation
+                ibBookmark.isSelected = verse.isBookmarked
 
-                binding.root.setOnClickListener {
-                    listener(verse)
+                root.setOnClickListener {
+                    onItemClicked(verse)
+                }
+                ibBookmark.setOnClickListener {
+                    onBookmarkClicked(verse)
                 }
             }
         }
@@ -36,7 +41,7 @@ class VerseRVAdapter(
 
     override fun onBindViewHolder(holder: VerseViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bindItem(item, listener)
+        holder.bindItem(item, onItemClicked, onBookmarkClicked)
     }
 
     private class DiffUtilVerse : DiffUtil.ItemCallback<Verse>() {

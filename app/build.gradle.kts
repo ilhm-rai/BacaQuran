@@ -69,7 +69,6 @@ dependencies {
     implementation("com.google.android.material:material:${materialVersion}")
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("io.github.java-diff-utils:java-diff-utils:4.12")
 
     // Lifecycle Components
@@ -80,7 +79,6 @@ dependencies {
 
     // ViewModel Components
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-    implementation("com.github.bumptech.glide:glide:4.14.2")
     implementation("androidx.activity:activity-ktx:${activityVersion}")
 
     // Room Components

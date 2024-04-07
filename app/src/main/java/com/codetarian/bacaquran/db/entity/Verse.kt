@@ -19,4 +19,6 @@ data class Verse(
     @ColumnInfo(name = "translation") var translation: String,
     @ColumnInfo(name = "latin") var latin: String,
     @ColumnInfo(name = "footnotes") var footnotes: String?,
-): Parcelable
+    @ColumnInfo(name = "is_bookmarked") var isBookmarked: Boolean = false,
+    @ColumnInfo(name = "bookmarked_at") var bookmarkedAt: String?,
+) : Parcelable

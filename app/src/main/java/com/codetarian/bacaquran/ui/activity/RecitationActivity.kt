@@ -71,6 +71,8 @@ class RecitationActivity : AppCompatActivity() {
             textArabic.text = verse.arabicIndopak
             textLatin.text = verse.latin
             textTranslation.text = verse.translation
+            ibBookmark.isSelected = verse.isBookmarked
+            ibBookmark.isClickable = false
         }
     }
 

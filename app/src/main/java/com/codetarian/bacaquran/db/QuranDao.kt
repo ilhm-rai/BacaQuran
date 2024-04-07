@@ -6,6 +6,7 @@ import androidx.room.Query
 import com.codetarian.bacaquran.db.entity.Juz
 import com.codetarian.bacaquran.db.entity.Surah
 import com.codetarian.bacaquran.db.entity.Verse
+import com.codetarian.bacaquran.db.entity.VerseAndSurah
 
 @Dao
 interface QuranDao {
@@ -57,4 +58,22 @@ interface QuranDao {
                 "    q1.juz;\n"
     )
     fun getAllJuz(): LiveData<List<Juz>>
+
+
+    @Query(
+        "SELECT qv.*, qs.transliteration FROM quran_verse AS qv " +
+                "INNER JOIN quran_surah AS qs " +
+                "ON qv.surah_id = qs.id " +
+                "WHERE qv.is_bookmarked = 1 " +
+                "ORDER BY ayah ASC"
+    )
+    fun getBookmarkedVerses(): LiveData<List<VerseAndSurah>>
+
+    @Query(
+        "UPDATE quran_verse " +
+                "SET is_bookmarked = NOT is_bookmarked, " +
+                "bookmarked_at = DATETIME('now', 'localtime') " +
+                "WHERE id = :verseId"
+    )
+    fun updateVerseBookmark(verseId: Int)
 }

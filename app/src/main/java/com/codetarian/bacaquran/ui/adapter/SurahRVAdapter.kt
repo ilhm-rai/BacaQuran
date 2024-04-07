@@ -14,7 +14,7 @@ import com.codetarian.bacaquran.db.entity.Surah
 
 class SurahRVAdapter(
     private val context: Context,
-    private val listener: (Surah) -> Unit
+    private val onItemClicked: (Surah) -> Unit
 ) : ListAdapter<Surah, SurahRVAdapter.SurahViewHolder>(DiffUtilSurah()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurahViewHolder {
@@ -24,7 +24,7 @@ class SurahRVAdapter(
 
     override fun onBindViewHolder(holder: SurahViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bindItem(item, listener)
+        holder.bindItem(item, onItemClicked)
     }
 
     inner class SurahViewHolder(private val binding: ItemSurahBinding) : RecyclerView.ViewHolder(binding.root) {
