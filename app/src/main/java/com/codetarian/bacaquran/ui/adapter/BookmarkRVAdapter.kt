@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.codetarian.bacaquran.R
 import com.codetarian.bacaquran.databinding.ItemBookmarkBinding
 import com.codetarian.bacaquran.db.entity.VerseAndSurah
 import com.codetarian.bacaquran.utils.DateUtil
@@ -37,7 +38,7 @@ class BookmarkRVAdapter(
                     textArabic.text = verseAndSurah.verse.arabicIndopak
                     textLatin.text = verseAndSurah.verse.latin
                     textTranslation.text = verseAndSurah.verse.translation
-                    ibBookmark.isSelected = verseAndSurah.verse.isBookmarked
+                    ibBookmark.setImageResource(R.drawable.baseline_bookmark_remove_24)
                     ibBookmark.setOnClickListener {
                         onBookmarkClicked(verseAndSurah)
                     }
