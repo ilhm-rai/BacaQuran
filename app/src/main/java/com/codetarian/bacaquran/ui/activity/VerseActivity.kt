@@ -1,10 +1,13 @@
 package com.codetarian.bacaquran.ui.activity
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager2.widget.ViewPager2
+import com.codetarian.bacaquran.R
 import com.codetarian.bacaquran.databinding.ActivityVerseBinding
 import com.codetarian.bacaquran.ui.adapter.VersePagerAdapter
 import com.codetarian.bacaquran.ui.fragment.VerseFragment.VerseFragmentListener
@@ -51,6 +54,21 @@ class VerseActivity : AppCompatActivity(), VerseFragmentListener {
             }
         })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        //menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_find_surah -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     private fun setupTabLayout() {
         TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->

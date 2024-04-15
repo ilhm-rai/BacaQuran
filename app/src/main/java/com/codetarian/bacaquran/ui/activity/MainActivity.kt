@@ -1,6 +1,8 @@
 package com.codetarian.bacaquran.ui.activity
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.codetarian.bacaquran.R
 import com.codetarian.bacaquran.databinding.ActivityMainBinding
@@ -32,8 +34,22 @@ class MainActivity : AppCompatActivity() {
         setupTabLayout()
 
         Coroutines.io {
-            //copyModelsFromAssets()
-            //copyDatabaseFromAssets()
+            copyModelsFromAssets()
+            copyDatabaseFromAssets()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        //menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_find_surah -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
