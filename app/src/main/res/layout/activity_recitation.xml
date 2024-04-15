@@ -68,6 +68,8 @@
                     android:layout_marginBottom="16dp"
                     android:textAlignment="center"
                     android:textColor="@color/pewter"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
                     tools:text="@string/levenshtein_distance" />
 
                 <androidx.recyclerview.widget.RecyclerView

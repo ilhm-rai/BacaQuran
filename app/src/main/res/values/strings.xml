@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BacaQuran</string>
+    <string name="app_name">Baca Qur\'an</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="ayah">1</string>
     <string name="ayah_arabic_indopak">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</string>
@@ -18,7 +18,7 @@
     <string name="surah">Surah</string>
     <string name="juz">Juz</string>
     <string name="bookmark">Bookmark</string>
-    <string name="levenshtein_distance">Distance: 0.85714287</string>
+    <string name="levenshtein_distance">Tingkat Kesalahan: 17.06%</string>
     <string name="insert">Tambah</string>
     <string name="delete">Hapus</string>
     <string name="patch_word">Anda lupa membaca \'بِسْمِ اللّٰه\' pada ayat</string>
@@ -28,4 +28,6 @@
     <string name="add_or_delete_bookmark">Tambah atau Hapus Bookmrk</string>
     <string name="bookmarked_at">6 hari yang lalu</string>
     <string name="bookmarked_verse">QS. Al-\'Ankabut: Ayat 69 (Juz 21)</string>
+    <string name="setting">Pengaturan</string>
+    <string name="find_surah">Cari Surat</string>
 </resources>

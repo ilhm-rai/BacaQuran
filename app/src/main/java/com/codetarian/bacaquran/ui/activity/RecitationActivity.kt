@@ -23,9 +23,11 @@ import com.codetarian.bacaquran.utils.constant.ModelConstants
 import com.codetarian.bacaquran.databinding.ActivityRecitationBinding
 import com.codetarian.bacaquran.db.entity.Verse
 import com.codetarian.bacaquran.utils.LevenshteinDistance
+import com.codetarian.bacaquran.utils.constant.StringConstants
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.difflib.DiffUtils
+import com.github.difflib.patch.Patch
 import org.deepspeech.libdeepspeech.DeepSpeechModel
 import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
@@ -76,8 +78,7 @@ class RecitationActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerView(originalText: String, modifiedText: String) {
-        val patches = DiffUtils.diff(originalText.split(""), modifiedText.split(""))
+    private fun setupRecyclerView(patches: Patch<String>) {
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val recitationRVAdapter by lazy { RecitationRVAdapter(this, patches) }
 
@@ -100,18 +101,23 @@ class RecitationActivity : AppCompatActivity() {
     }
 
     private fun showReciteValidation() {
-        setupRecyclerView(verse.arabic, transcription)
-        binding.textTranscription.text = highlightDifferences(verse.arabic, transcription)
-        val txtDistance =
-            "Distance: ${LevenshteinDistance.calculate(verse.arabic, transcription)}"
-        binding.textLevenshteinDistance.text = txtDistance
+        val patches = DiffUtils.diff(verse.arabic.split(""), transcription.split(""))
+        setupRecyclerView(patches)
+        binding.textTranscription.text = highlightDifferences(patches, transcription)
+        val differencePercentage = 100 - LevenshteinDistance.calculate(verse.arabic, transcription)
+        if (differencePercentage != 0.0) {
+            val txtDistance = String.format(StringConstants.DISTANCE, differencePercentage)
+            binding.textLevenshteinDistance.text = txtDistance
+            binding.textLevenshteinDistance.visibility = View.VISIBLE
+        } else {
+            binding.textLevenshteinDistance.visibility = View.INVISIBLE
+        }
     }
 
     private fun highlightDifferences(
-        originalText: String,
+        patches: Patch<String>,
         modifiedText: String
     ): SpannableString {
-        val patches = DiffUtils.diff(originalText.split(""), modifiedText.split(""))
 
         val spannableString = SpannableString(modifiedText)
 

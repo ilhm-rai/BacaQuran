@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codetarian.bacaquran.R
+import com.codetarian.bacaquran.utils.constant.StringConstants
 import com.github.difflib.patch.DeltaType
 import com.github.difflib.patch.Patch
 import java.lang.StringBuilder
@@ -39,19 +40,19 @@ class RecitationRVAdapter(
                 deltaType = context.getString(R.string.insert)
                 bgColor = R.color.persian_green
                 val word = delta.source.lines.joinToString("")
-                message.append("Anda lupa membaca '$word' pada ayat")
+                message.append(String.format(StringConstants.MISSING_WORD, word))
             }
             DeltaType.CHANGE -> {
                 deltaType = context.getString(R.string.delete)
                 bgColor = R.color.cinnabar
                 val word = delta.target.lines.joinToString("")
-                message.append("Kata '$word' tidak terdapat pada ayat")
+                message.append(String.format(StringConstants.WRONG_WORD, word))
             }
             DeltaType.INSERT -> {
                 deltaType = context.getString(R.string.delete)
                 bgColor = R.color.cinnabar
                 val word = delta.target.lines.joinToString("")
-                message.append("Kata '$word' tidak terdapat pada ayat")
+                message.append(String.format(StringConstants.WRONG_WORD, word))
             }
             else -> return
         }
