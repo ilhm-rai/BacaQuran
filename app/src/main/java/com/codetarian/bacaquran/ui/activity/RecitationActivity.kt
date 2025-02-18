@@ -183,16 +183,16 @@ class RecitationActivity : AppCompatActivity() {
             while (isRecording.get()) {
                 recorder.read(audioData, 0, audioBufferSize)
                 model.feedAudioContent(streamContext, audioData, audioData.size)
-                val decoded = model.intermediateDecode(streamContext)
-                runOnUiThread { transcription = decoded }
+                // val decoded = model.intermediateDecode(streamContext)
+                // runOnUiThread { transcription = decoded }
             }
 
             val decoded = model.finishStream(streamContext)
 
             runOnUiThread {
-                binding.buttonRecord.setImageResource(R.drawable.ic_action_recording)
                 transcription = decoded
                 showReciteValidation()
+                binding.buttonRecord.setImageResource(R.drawable.ic_action_recording)
             }
 
             recorder.stop()

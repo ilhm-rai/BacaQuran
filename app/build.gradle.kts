@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -70,6 +71,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
     implementation("io.github.java-diff-utils:java-diff-utils:4.12")
+    implementation("androidx.test.espresso:espresso-idling-resource:${espressoVersion}")
 
     // Lifecycle Components
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
@@ -97,13 +99,20 @@ dependencies {
     implementation("org.deepspeech:libdeepspeech:0.9.3")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+    implementation("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    ksp("com.google.dagger:hilt-compiler:2.37")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    ksp("androidx.hilt:hilt-compiler:1.0.0")
 
     testImplementation("junit:junit:${junitVersion}")
     androidTestImplementation("androidx.arch.core:core-testing:${coreTestingVersion}")
     androidTestImplementation("androidx.test.ext:junit:${androidxJunitVersion}")
-    androidTestImplementation("androidx.test.espresso:espresso-core:${espressoVersion}")
 
+    // Espresso
+    androidTestImplementation("androidx.test.espresso:espresso-core:${espressoVersion}")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:${espressoVersion}")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:${espressoVersion}")
+    androidTestImplementation("androidx.test.espresso:espresso-idling-resource:${espressoVersion}")
 }

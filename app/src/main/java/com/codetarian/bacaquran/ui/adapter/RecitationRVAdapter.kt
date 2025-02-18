@@ -42,12 +42,7 @@ class RecitationRVAdapter(
                 val word = delta.source.lines.joinToString("")
                 message.append(String.format(StringConstants.MISSING_WORD, word))
             }
-            DeltaType.CHANGE -> {
-                deltaType = context.getString(R.string.delete)
-                bgColor = R.color.cinnabar
-                val word = delta.target.lines.joinToString("")
-                message.append(String.format(StringConstants.WRONG_WORD, word))
-            }
+            DeltaType.CHANGE,
             DeltaType.INSERT -> {
                 deltaType = context.getString(R.string.delete)
                 bgColor = R.color.cinnabar
